@@ -78,7 +78,7 @@ const Navbar = ({ country, setCountry, setLanguage, setSearch }, search) => {
             <li className="nav-link" onClick={() => setCountry("us")}>United States</li>
             <li className="nav-link" onClick={() => setCountry("ve")}>Venezuela</li>
             <li className="nav-link" onClick={() => setCountry("za")}>South Africa</li>
-
+  
           </ul>
 
           <Link className="title navbar-link" to="/"><img className="logo" src="ns.png" /> News Snippets</Link>
