@@ -1,6 +1,6 @@
 import Navbar from "./Components/Navbar";
 import News from "./Components/News";
-import { Component, useState} from "react";
+import { useState} from "react";
 import  React from "react";
 import LoadingBar from 'react-top-loading-bar'
 
@@ -26,7 +26,7 @@ const App = () =>{
 //  }
  
   return (
-    <div >
+    <div>
       
     <Router>
     <LoadingBar

@@ -13,6 +13,7 @@ const News =(props)=> {
 
 
   const updateNews = async () =>{
+    // setPage(page+1)
   props.setProgress(0)
     const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&q=${props.search}&apiKey=8d1abd32b6c04ff5b69fe38407336fe5&page=${page}&pageSize=${props.pageSize}`;
     setLoading(true)
@@ -30,26 +31,21 @@ useEffect(()=>{
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     updateNews()
     
-},[props.country], [props.search])
+},[props.country,props.search, page])
 
+
+const handleNextClick = async () =>{
+  updateNews()
+  
+  setPage(page+1)
+}
 
   const handlePrevClick = async () =>{
-    setPage(page-1)
+   
     updateNews()
-
+    setPage(page-1)
     
   }
- const handleNextClick = async () =>{
-        setPage(page+1)
-          updateNews()
-    
-      }
-    
-  
-  
-
-
-    
 
     return(
 
@@ -58,28 +54,33 @@ useEffect(()=>{
             <h3 className="title2">Top {props.category} Snippets</h3> 
             {loading&&<Spinner/>}
              <div className="row">
-                {!loading && articles.map((element) =>{
-           return <div className="col-md-4" key = {element.url}>          
-           <NewsItem title =  {element.title.length<100? element.title: element.title.slice(0,100)+"..."}
-           /* <NewsItem title =  {element.title} */
-                      source = {element.source.name}
-                      // description = {element.description?element.description.slice(0,80):""}
-                      urlToImage = {element.urlToImage}
-                      url = {element.url}
-                      author = {element.author}
-                      publishedAt = {element.publishedAt}
-                     
-                    
-                      />
-                      </div> 
-                    })}
+              {articles && articles.length>0 ?
+               !loading && articles.map((element) =>{
+                return <div className="col-md-4" key = {element.url}>          
+                <NewsItem title =  {element.title.length<100? element.title: element.title.slice(0,100)+"..."}
+                /* <NewsItem title =  {element.title} */
+                           source = {element.source.name}
+                           // description = {element.description?element.description.slice(0,80):""}
+                           urlToImage = {element.urlToImage}
+                           url = {element.url}
+                           author = {element.author}
+                           publishedAt = {element.publishedAt}   
+                            />
+                           </div> 
+                         })
+            
+                 :(!loading?<div className="result">No result found. Please search Relevant keyword for specific Category.</div>:"") 
+                        }
+               
                       </div>
 
                       <div className="container  d-flex justify-content-between">
-                      {page<=1?"":<button   type="button" className = "btn btn-dark" onClick={handlePrevClick}>&larr; Previous</button> } 
+                      {/* {page<=1?"":<button   type="button" className = "btn btn-dark" onClick={handlePrevClick}>&larr; Previous</button> }  */}
+                      <button disabled = {page<=1} type="button" className="btn btn-dark" onClick={handlePrevClick}>&larr; Previous</button>
                       {/* {page > 1 && (<button type="button"className="btn btn-dark" onClick={handlePrevClick}>&larr; Previous</button>)} */}
-                      {page + 1 > Math.ceil(totalResults/props.pageSize)?"":<button  type="button" className = "btn btn-dark" onClick={handleNextClick}>Next &rarr;</button>}  
-                      {/* {page + 1 <= Math.ceil(totalResults/props.pageSize) && (<button type="button" className="btn btn-dark" onClick={handleNextClick}>Next &rarr;</button>)}   disabled = */}
+                      <button disabled = {page+1>Math.ceil(totalResults/props.pageSize)} type="button" className = "btn btn-dark" onClick={handleNextClick}>Next &rarr;</button>
+                      {/* // {page + 1 > Math.ceil(totalResults/props.pageSize)?"":<button  type="button" className = "btn btn-dark" onClick={handleNextClick}>Next &rarr;</button>}   */}
+                      {/* {page + 1 <= Math.ceil(totalResults/props.pageSize) && (<button type="button" className="btn btn-dark" onClick={handleNextClick}>Next &rarr;</button>)}   */}
                       </div>
         </div>
     )

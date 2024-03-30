@@ -1,5 +1,7 @@
 .first{
-    height: 50px;
+    height: 55px;
+    display: flex;
+    align-items: center;
 }
 
 
@@ -20,18 +22,29 @@ text-transform: capitalize;
  
 }
 
-
+.nav-link.line{
+    text-decoration: underline;
+    text-decoration-color: black;
+    background-color: antiquewhite;
+}
 
 .dropdown-menu:hover{
  cursor: pointer;
 }
 
-.list{
+.list {
 margin-left: 4px;
  gap:25px;
  max-height: 130px;
-    overflow-y: auto;
+ overflow-y: auto;
+ text-decoration-line: none;
 
+}
+a{
+    text-decoration-line: none;
+    font-weight: 600;
+    padding: 5px;
+    width: 20%;
 }
 
 .second{
@@ -39,14 +52,20 @@ position: sticky;
 z-index: 1;
 }
 
+.drop{
+    position: relative;
+    left: 10px;
+}
+
 .title{
     text-decoration: none;
     font-weight: 600;
     color: black;
     position: absolute;
-    right: 40vw;
+    right: 0vw;
     font-size: 2.4vw;
-    top: 2px;
+    top: 0px;
+    width: 62%
 }
 
 
@@ -86,6 +105,31 @@ font-size: 5px
 .btn-dark:hover{
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.result{
+    margin: 30px;
+    font-size: 20px;
+}
+
+.card-title{
+    overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+           line-clamp: 3; 
+   -webkit-box-orient: vertical;
+
+}
+
+.pending{
+    color: #00b1cd;
+}
+
+.active{
+    color: black;
+    /* text-decoration-line: underline; */
+    border-bottom: 2px solid black;
+   
 }
 
 /* [aria-current="page"]{

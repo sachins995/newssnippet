@@ -1,25 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./news.css"
+import { NavLink } from "react-router-dom";
+
+
 const Navbar = ({ country, setCountry, setLanguage, setSearch }, search) => {
   const handleSearch = () => {
     // Handle search functionality here
     console.log(search); // This will log the current value of the search state
 
+
   };
 
   const [clicked, setClicked] = useState(false);
+  const [id, setId] = useState();
 
   const handleClick = () => {
       setClicked(!clicked);
+        setId("line")
+      
   }
   return (
     <>
 
       <nav className="first navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container" style={{width:"99% !important"}}>
-          <a className="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {/* <div className="container" style={{width:"99% !important"}}> */}
+          <a className="nav-link dropdown-toggle drop" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {country}
+            
           </a>
           {/* <a className="nav-link dropdown-toggle" href={`/${country}`} role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {country}
@@ -83,7 +91,7 @@ const Navbar = ({ country, setCountry, setLanguage, setSearch }, search) => {
 
           <Link className="title navbar-link" to="/"><img className="logo" src="ns.png" /> News Snippets</Link>
 
-        </div>
+        {/* </div> */}
       </nav>
 
       <nav className="second navbar fixed-top navbar-expand-lg bg-body-tertiary">
@@ -93,18 +101,21 @@ const Navbar = ({ country, setCountry, setLanguage, setSearch }, search) => {
             <span class="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className=" list navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-
-              </li>
-              <Link className="nav-link" aria-current="page" to="/" onClick={handleClick}>General</Link>
-              <Link className="nav-link" aria-current="page" to="/business" onClick={handleClick}>Business</Link>
-              <Link className="nav-link" aria-current="page" to="/entertainment" onClick={handleClick}>Entertainment</Link>
-              <Link className="nav-link" aria-current="page" to="/health" onClick={handleClick}>Health</Link>
-              <Link className="nav-link" aria-current="page" to="/science" onClick={handleClick}>Science</Link>
-              <Link className="nav-link" aria-current="page" to="/sports" onClick={handleClick}>Sports<span className="new position-absolute translate-middle badge rounded-pill bg-danger">New</span></Link>
-              <Link className="nav-link" aria-current="page" to="/technology" onClick={handleClick}>Technology</Link>
-
+            <ul className="list navbar-nav me-auto mb-2 mb-lg-0">
+              {/* <Link className="nav-link link" id = {(e)=>{return e.isClicked?"line":""}} to="/" onClick={handleClick}>General</Link> */}
+              <NavLink className={({ isActive}) =>  (isActive ? "active" : "pending")} onClick={handleClick} to="/">General</NavLink>
+              {/* <Link className="nav-link" id = {(e)=>{return e.isClicked?"line":""}}  to="/business" onClick={handleClick}>Business</Link> */}
+              <NavLink className={({ isActive}) =>  isActive ? "active" : "pending"} onClick={handleClick} to="/business">Business</NavLink>
+              {/* <Link className="nav-link"  id = {(e)=>{return e.isClicked?"line":""}}  to="/entertainment" onClick={handleClick}>Entertainment</Link> */}
+              <NavLink className={({ isActive}) =>  isActive ? "active" : "pending"} onClick={handleClick} to="/entertainment">Entertainment</NavLink>
+              {/* <Link className="nav-link" id = {(e)=>{return e.isClicked?"line":""}}   to="/health" onClick={handleClick}>Health</Link> */}
+              <NavLink className={({ isActive }) =>  isActive ? "active" : "pending"} onClick={handleClick} to="/health">Health</NavLink>
+              {/* <Link className="nav-link" id = {(e)=>{return e.isClicked?"line":""}}   to="/science" onClick={handleClick}>Science</Link> */}
+              <NavLink className={({ isActive}) =>  isActive ? "active" : "pending"} onClick={handleClick} to="/science">Science</NavLink>
+              {/* <Link className="nav-link position-relative" id = {(e)=>{return e.isClicked?"line":""}}   to="/sports" onClick={handleClick}>Sports<span className="new position-absolute translate-middle badge rounded-pill bg-danger">New</span></Link> */}
+              <NavLink className={({ isActive}) =>  isActive ? "active" : "pending"} onClick={handleClick} to="/sports">Sports<span className="new position-relative translate-middle badge rounded-pill bg-danger">New</span></NavLink>
+              {/* <Link className="nav-link"  id = {(e)=>{return e.isClicked?"line":""}}  to="/technology" onClick={handleClick}>Technology</Link> */}
+              <NavLink className={({ isActive}) =>  isActive ? "active" : "pending"} onClick={handleClick} to="/technology">Technology</NavLink>
               {/* <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Categories
@@ -127,7 +138,7 @@ const Navbar = ({ country, setCountry, setLanguage, setSearch }, search) => {
             </ul>
             <form className="d-flex" role="search">
               <input className="form-control me-2" id="search-text" type="search" value={search.value} onChange={(e) => setSearch(e.target.value)} placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success" id="search-button" type="submit" onClick={handleSearch}>Search</button>
+              {/* <button disabled = {search.value<0} className="btn btn-outline-success" id="search-button" type="submit" onClick={handleSearch}>Search</button> */}
             </form>
           </div>
         </div>
